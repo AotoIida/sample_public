@@ -1,0 +1,24 @@
+{% extends "user/base.html" %}
+{% block content%}
+<h1>☆★☆ユーザー一覧画面☆★☆</h1>
+
+<table>
+    <tr>
+        <th>名前</th>    
+        <th>くだもの</th>  
+        <th>ウェブサイト</th>  
+    </tr>
+    {% for profile in profile %}
+    <tr>
+        <td> {{profile.user.username}} </td> <!-- 外部キーから値をとるときはこうする -->   
+        <td> {{profile.fruits}} </td>  
+        <td> {{profile.website}} </td>  
+    </tr>
+    {% endfor %}
+
+</table>
+<a href="{% url 'user:index' %}">メニュー画面へ戻る </a>
+<a href="{% url 'user:register' %}">登録画面へ進む</a>
+
+
+{% endblock %}

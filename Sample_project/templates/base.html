@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset = "utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <nav class="navber navber-expand-lg nabver-light bg-light">
+            <a class="navber-brand" href="{% url 'my_app:index'%}">ログイン画面</a>
+            <a class="navber-brand" href="{% url 'my_app:menu'%}">メニュー</a>
+            <a class="navber-brand" href="{% url 'my_app:list'%}">登録者一覧</a>
+            <a class="navber-brand" href="{% url 'my_app:regist'%}">ユーザー登録</a>
+        </nav>
+        {% block content %}{% endblock %}
+    </body>
+</html>
