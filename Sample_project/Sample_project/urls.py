@@ -19,5 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', include('my_app.urls')),
-    path('user/', include('user.urls'))
+    path('', include('user.urls')) #URL指定しなくても遷移できるように
 ]

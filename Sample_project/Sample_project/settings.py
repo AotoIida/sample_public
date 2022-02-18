@@ -26,8 +26,17 @@ SECRET_KEY = 'django-insecure-*srfw^hs8k97#295((-5#7de6jc7xm7uwva+2_cwh57#74*jd+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['54.178.188.151','127.0.0.1' ,'localhost'] #EC2内でmanage.py runserverするときは設定必須！！
 
+#【EC2上でrunserver起動】
+#１　EC2で8000ポートを開ける
+#２　EC2の仮想環境上(cmd)でpython manage.py runserver 0.0.0.0:8000でランサーバーを立ち上げること
+#３　ブラウザでは「http://54.178.188.151:8000/」指定で飛べるはず
+
+#【mod_wsgiとの連携で必要なALLOWED＿HOSTS】
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+#ALLOWD_HOSTSの設定はおそらく、実際にアクセスされた時のHTTPヘッダーのホスト名と比較されるものと思われる。
+#上記設定ではローカルホストからしかアクセスできないので、実際には、クライアントからアクセスされる時のサーバーのホスト名を設定してやらなければならない
 
 # Application definition
 
@@ -76,24 +85,24 @@ WSGI_APPLICATION = 'Sample_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': BASE_DIR / 'sample',
-        'USER': 'admin',
-        'PASSWORD': 'password',
-        'HOST': 'sample-db.cj6fnry7hl8b.ap-northeast-1.rds.amazonaws.com',
-        'POST': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'user',
+#        'USER': 'admin',
+#        'PASSWORD': 'password',
+#        'HOST': 'sample-db.cj6fnry7hl8b.ap-northeast-1.rds.amazonaws.com',
+#        'POST': '3306',
+#    }
+#}
 
 
 # Password validation

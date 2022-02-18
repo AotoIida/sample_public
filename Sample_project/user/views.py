@@ -25,6 +25,12 @@ def index(request):
         'profile' : profile
     })
 
+def first(request):
+    profile = Profile.objects.all() #全件取得
+    return render(request, 'user/index.html', context={
+        'profile' : profile
+    })
+
 def register(request):
     user_form = UserForm(request.POST or None) 
     profile_form = ProfileForm(request.POST or None, request.FILES or None)
