@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', include('my_app.urls')),
     path('', include('user.urls')) #URL指定しなくても遷移できるように
 ]
+
+# これは通常DEBUGモードのみ付け加えるオプションで、本番はApache側で設定が必要！！
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

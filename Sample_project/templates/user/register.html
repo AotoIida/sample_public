@@ -1,18 +1,30 @@
 {% extends "user/base.html" %}
 {% block content%}
 <h1>☆★☆登録画面☆★☆</h1>
+<hr style="border-top: 5px double #000;"> </hr>
+<p> <font size="5" color="red">必須項目です！</font></p>
+
 <form method="POST" enctype="multipart/form-data">
 {% csrf_token %}
-{{ user_form.as_p}}
-{{ profile_form.as_p}}
-<input type="submit" value="登録">
+{{ user_form.as_ul}}
 
+<hr style="border-top: 3px dotted #000;"> </hr>
+<p><font color="blue">もしよければ、以下の情報も登録してみませんか？</font></p>
+{{ profile_form.as_ul}}
+
+<hr style="border-top: 3px dotted #000;"> </hr>
+<br>
+<input type="submit" value="登録">
+<br>
 </form>
 
 {% if user.is_authenticated %}
+<br>
 <a href="{% url 'user:user_list' %}">ユーザー一覧へ戻る</a>
 {% else %}
+<br>
 <a href="{% url 'user:index' %}">メニュー画面へ戻る</a>
+<br>
 <a href="{% url 'user:user_login' %}">このままログイン画面に進む</a>
 {% endif %}
 

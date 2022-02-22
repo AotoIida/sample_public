@@ -18,6 +18,11 @@ def user_list(request): #02/10 12:41 今profileだけインポートしてるけ
         'profile' : profile
     })
 
+def first(request): #URL自動設定
+    profile = Profile.objects.all() #全件取得
+    return render(request, 'user/index.html', context={
+        'profile' : profile
+    })
 
 def index(request):
     profile = Profile.objects.all() #全件取得
@@ -25,11 +30,13 @@ def index(request):
         'profile' : profile
     })
 
-def first(request):
-    profile = Profile.objects.all() #全件取得
-    return render(request, 'user/index.html', context={
+def profile(request): #URL自動設定
+    ID = request.GET['ID'] #IDとなるuser_id取得
+    profile = Profile.objects.filter(user_id=ID) #～さんの情報を取得（IDでフィルタリングする）
+    return render(request, 'user/profile.html', context={
         'profile' : profile
     })
+
 
 def register(request):
     user_form = UserForm(request.POST or None) 
@@ -61,11 +68,6 @@ def user_login(request):
         if user: #ユーザが存在する場合
             if user.is_active: #さらにユーザが有効な場合は
                 login(request, user) #ログインする
-#                URL = reverse('user:index')
-#                parameter = urlencode({'NAME' : username}) #49~51　おためし
-#                plusURL = f'{URL}?{parameter}'
-#                return redirect(plusURL)
-#                return redirect('user:index', NAME=1)
                 return render(request, 'user/index.html', context={
                     'username' : username
                 })

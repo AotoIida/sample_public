@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 from user.models import Profile
 
 
-class UserForm(forms.ModelForm):
-    username = forms.CharField(label='名前')
-    email = forms.EmailField(label='メールアドレス')
-    password = forms.CharField(label='パスワード', widget=forms.PasswordInput())
+class UserForm(forms.ModelForm): #デフォルトのログイン機能のテーブル
+    username = forms.CharField(label='ニックネーム　　')
+    email = forms.EmailField(label='メールアドレス　')
+    password = forms.CharField(label='パスワード　　　', widget=forms.PasswordInput())
     Cpassword = forms.CharField(label='パスワード再入力', widget=forms.PasswordInput())
     class Meta():
         model = User
@@ -20,14 +20,16 @@ class UserForm(forms.ModelForm):
              raise forms.ValidationError('パスワードが一致しません')
 
 
-class ProfileForm(forms.ModelForm):
-    fruits = forms.CharField(label='果物')
-    website = forms.URLField(label='ホームページ')
-    picture = forms.FileField(label='写真')
+class ProfileForm(forms.ModelForm): #自作のプロフィテーブル
+    fruits = forms.CharField(label='くだもの　　', required=False)
+    age = forms.IntegerField(label='年齢　　　　',required=False)
+    hobby = forms.CharField(label='趣味　　　　',required=False)
+    website = forms.URLField(label='ホームページ', required=False)
+    picture = forms.FileField(label='アイコン画像', required=False, initial="user/nosettings.png")
 
     class Meta:
         model = Profile
-        fields = ('fruits', 'website', 'picture')
+        fields = ('fruits', 'age', 'hobby', 'website', 'picture')
 
 
 class LoginForm(forms.Form):

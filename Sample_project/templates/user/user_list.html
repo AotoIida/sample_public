@@ -1,23 +1,25 @@
 {% extends "user/base.html" %}
 {% block content%}
 <h1>☆★☆ユーザー一覧画面☆★☆</h1>
-
-<table>
+<hr style="border-top: 5px double #000;"> </hr>
+<table border=1 width=300 height=100>
     <tr>
-        <th>名前</th>    
+        <th> </th>
+        <th>ニックネーム</th>    
         <th>くだもの</th>  
-        <th>ウェブサイト</th>  
     </tr>
     {% for profile in profile %}
     <tr>
-        <td> {{profile.user.username}} </td> <!-- 外部キーから値をとるときはこうする -->   
+        <td style="text-align:center"> <img src="{{ profile.picture.url }}" width="30" height='30'></img></td>
+        <td><a href="{% url 'user:profile' %}?ID={{profile.user_id}}"> {{profile.user.username}} </a></td> <!-- 外部キーから値をとるときはこうする -->   
         <td> {{profile.fruits}} </td>  
-        <td> {{profile.website}} </td>  
     </tr>
     {% endfor %}
 
 </table>
+<br>
 <a href="{% url 'user:index' %}">メニュー画面へ戻る </a>
+<br>
 <a href="{% url 'user:register' %}">登録画面へ進む</a>
 
 
